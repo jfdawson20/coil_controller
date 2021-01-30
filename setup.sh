@@ -1,4 +1,5 @@
 #/bin/bash 
+PROJ_NAME=main 
 PROJ_DIR=$(pwd)
 SDK_DIR=$(realpath $PROJ_DIR/../pico-sdk)
 ROOT_DIR=$(realpath ~/)
@@ -20,5 +21,17 @@ echo "Adding Pico SDK Environment Variables"
 echo "export PICO_SDK_PATH=$SDK_DIR" >> $ROOT_DIR/.bashrc
 source $ROOT_DIR/.bashrc
 
-echo "Setup Complete, to build project cd into $PROJ_DIR/build and run: cmake ../"
-echo "Then run make main"
+#make a build directory 
+echo "Making Local Build Directory"
+mkdir build 
+cd build 
+
+#setting up cmake env
+echo "Setting up CMake Environment"
+cmake ../
+
+echo "Building Project" 
+make $PROJ_NAME
+
+echo "Setup Complete"
+cd $PROJ_DIR
